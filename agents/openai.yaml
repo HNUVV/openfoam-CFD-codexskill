@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenFOAM CFD"
+  short_description: "OpenFOAM case setup, meshing, source terms, and post-processing"
+  default_prompt: "Help me with OpenFOAM CFD: case setup, meshing, source terms, or publication-level post-processing with MATLAB/Tecplot/ParaView"

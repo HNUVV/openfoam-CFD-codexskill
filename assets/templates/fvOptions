@@ -1,0 +1,51 @@
+FoamFile { version 2.0; format ascii; class dictionary; object fvOptions; }
+
+/* Example: scalar coded source for energy equation */
+energySource
+{
+    type            scalarCodedSource;
+    selectionMode   all;
+    fields          (h);
+    name            sourceTime;
+    codeInclude
+    #{
+        #include "fvCFD.H"
+    #};
+    codeCorrect
+    #{
+        const scalarField& T = mesh().lookupObject<volScalarField>("T");
+        scalarField& heSource = eqn.source();
+        // Modify source term expression here:
+        heSource += REPLACE_SOURCE_EXPR;
+    #};
+}
+
+/* Example: explicit momentum source (e.g., pump/fan) */
+/*
+momentumSource
+{
+    type            vectorSemiImplicitSource;
+    selectionMode   cellSet;
+    cellSet         sourceCells;
+    volumeMode      absolute;
+    injectionRateSuSp
+    {
+        U           (REPLACE_FX REPLACE_FY REPLACE_FZ);
+    }
+}
+*/
+
+/* Example: scalar transport source */
+/*
+scalarSource
+{
+    type            scalarSemiImplicitSource;
+    selectionMode   cellZone;
+    cellZone        sourceZone;
+    volumeMode      specific;
+    injectionRateSuSp
+    {
+        T           (REPLACE_VOL_SOURCE 0);
+    }
+}
+*/

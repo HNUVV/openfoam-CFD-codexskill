@@ -1,0 +1,26 @@
+FoamFile { version 2.0; format ascii; class volVectorField; object U; }
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (REPLACE_UX REPLACE_UY REPLACE_UZ);
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (REPLACE_UX REPLACE_UY REPLACE_UZ);
+    }
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform (0 0 0);
+        value           uniform (0 0 0);
+    }
+    walls
+    {
+        type            noSlip;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
